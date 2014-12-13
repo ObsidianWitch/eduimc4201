@@ -1,6 +1,3 @@
-/*
-RTAI module skeleton
-*/
 #include <linux/module.h>
 MODULE_LICENSE("GPL");
 #include <asm/io.h>
@@ -13,11 +10,12 @@ MODULE_LICENSE("GPL");
 #define TICK_PERIOD 1000000    //  1 ms
 #define VALUE       200000000
 #define N_LOOP      10
+#define N_TASK      3
 
-static int C[3] = {1, 2, 3}; // low value -> high priority
-static int Period[3] = {4, 6, 8};
-static int Priority[3] = {1, 2, 3}; // 4, 6, 8
-static RT_TASK task1, task2, task3;
+static int C[N_TASK] = {1, 2, 3};
+static int Period[N_TASK] = {4, 6, 8};
+static int Priority[N_TASK] = {1, 2, 3};
+static RT_TASK[N_TASK] tasks;
 
 void task_body(int arg) {
     static int loop = N_LOOP;
@@ -36,33 +34,35 @@ void task_body(int arg) {
 }
 
 static int my_init(void) {
-    int i, ierr1, ierr2, ierr3;
+    int i;
 
     rt_set_oneshot_mode();
 
-    ierr1 = rt_task_init(&task1, task_body, 0, STACK_SIZE, Priority[0], 0, 0);
-    ierr2 = rt_task_init(&task2, task_body, 1, STACK_SIZE, Priority[1], 0, 0);
-    ierr3 = rt_task_init(&task3, task_body, 2, STACK_SIZE, Priority[2], 0, 0);
-    printk("[task %d] init return code %d by program %s\n", 1, ierr1, __FILE__);
-    printk("[task %d] init return code %d by program %s\n", 2, ierr2, __FILE__);
-    printk("[task %d] init return code %d by program %s\n", 3, ierr3, __FILE__);
+    for (i = 0 ; i < N_TASKS ; i++) {
+        int ierr = rt_task_init(tasks[i], task_body, i, STACK_SIZE, Priority[i], 0, 0);
 
-    if (!ierr1 && !ierr2 && !ierr3) {
-        start_rt_timer( nano2count(TICK_PERIOD));
+        printk("[task %d] init return code %d by program %s\n", i, ierr, __FILE__);
 
-        rt_task_make_periodic(&task1, rt_get_time(), nano2count(Period[0] * PERIOD));
-        rt_task_make_periodic(&task2, rt_get_time(), nano2count(Period[1] * PERIOD));
-        rt_task_make_periodic(&task3, rt_get_time(), nano2count(Period[2] * PERIOD));
+        if (!ierr) {
+            return ierr;
+        }
     }
-    
-    return ierr1 && ierr2 && ierr3;
+
+    start_rt_timer(nano2count(TICK_PERIOD));
+
+    for (i = 0 ; i < N_TASKS ; i++) {
+        rt_task_make_periodic(tasks[i], rt_get_time(), nano2count(Period[i] * PERIOD));
+    }
+
+    return 0;
 }
 
 void my_exit(void) {
     stop_rt_timer();
-    rt_task_delete(&task1);
-    rt_task_delete(&task2);
-    rt_task_delete(&task3);
+
+    for (i = 0 ; i < N_TASKS ; i++) {
+        rt_task_delete(tasks[i]);
+    }
 }
 
 module_init(my_init);
