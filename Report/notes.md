@@ -383,3 +383,28 @@ Execution trace
     Start task 2	  2888313588 ns
     End task 2	  3008317968 ns
     Task length 2	  37499084 ns
+
+TP2
+===
+
+exo1
+---
+
+Execution Trace
+
+    [task 1] init return code 0 by program /home/rtai/Desktop/rtai_tp/tp2/task.c
+    [task 2] init return code 0 by program /home/rtai/Desktop/rtai_tp/tp2/task.c
+    T1
+    T2 starts after T1
+    T1 after T2
+    T2 ends
+
+    T1
+    T2 starts after T1
+    T1 after T2
+    T2 ends
+
+    T1
+    T2 starts after T1
+    T1 after T2
+    T2 ends
