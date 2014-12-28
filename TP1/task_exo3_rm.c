@@ -11,9 +11,18 @@ MODULE_LICENSE("GPL");
 #define N_LOOP      10
 #define N_TASK      3
 
+// Set1
+static int C[N_TASK] = {1, 2, 3};
+static int Period[N_TASK] = {4, 6, 8};
+static int Priority[N_TASK] = {1, 2, 3};
+
+// Set2
+/*
 static int C[N_TASK] = {2, 2, 5};
 static int Period[N_TASK] = {7, 11, 13};
 static int Priority[N_TASK] = {1, 2, 3};
+*/
+
 static RT_TASK tasks[N_TASK];
 static RTIME first_release;
 

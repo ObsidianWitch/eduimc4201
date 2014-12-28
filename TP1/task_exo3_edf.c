@@ -12,11 +12,21 @@ MODULE_LICENSE("GPL");
 #define N_TASK      3
 #define ONE_SEC     1000000000
 
+// Set1
+static int C[N_TASK] = {1, 2, 3};
+static int Period[N_TASK] = {4, 6, 8};
+static int Priority[N_TASK] = {1, 2, 3};
+
+// Set2
+/*
 static int C[N_TASK] = {2, 2, 5};
 static int Period[N_TASK] = {7, 11, 13};
 static int Priority[N_TASK] = {1, 2, 3};
+*/
+
 static RT_TASK tasks[N_TASK];
 static RTIME first_release;
+static RTIME time_unit;
 
 RTIME calibrate() {
 	int k;
@@ -49,6 +59,7 @@ void task_body(int arg) {
     while (loop--) {
         int i;
 		RTIME begin, end;
+
 		begin = rt_get_time();
         rt_printk("Start task %d\t  %llu ns\n", arg, count2nano(begin-first_release));
         for(i = 0; i < C[arg] ; i++) {
@@ -64,7 +75,6 @@ void task_body(int arg) {
 
 static int my_init(void) {
     int i;
-    RTIME time_unit;
 
     rt_set_oneshot_mode();
 
