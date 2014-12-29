@@ -408,3 +408,51 @@ Execution Trace
     T2 starts after T1
     T1 after T2
     T2 ends
+    
+exo2
+---
+
+Execution Trace
+
+	[Counter] init return code 0 by program /media/home/obside/Documents/ESIEE/E4/IMC-4201_Real_Time_Systems/TPs/2014/TP2/task_exo2.c
+	[WD] init return code 0 by program /media/home/obside/Documents/ESIEE/E4/IMC-4201_Real_Time_Systems/TPs/2014/TP2/task_exo2.c
+	[Counter 1]: Execution time :537 ns	Period: 50000000 ns
+	[Counter 2]: Execution time :49997769 ns	Period: 60000000 ns
+	[Counter 3]: Execution time :59993311 ns	Period: 70000000 ns
+	[Counter 4]: Execution time :69993624 ns	Period: 80000000 ns
+	[Counter 5]: Execution time :79996640 ns	Period: 90000000 ns
+	[Counter 6]: Execution time :89997109 ns	Period: 100000000 ns
+	[Counter 7]: Execution time :99997198 ns	Period: 110000000 ns
+	[Counter 8]: Execution time :109997454 ns	Period: 120000000 ns
+	[WD] Watchdog timeout
+
+	[Counter 9]: Execution time :119997309 ns	Period: 130000000 ns
+	[WD] Watchdog timeout
+	
+	[Counter 10]: Execution time :129996931 ns	Period: 140000000 ns
+	[WD] Watchdog timeout
+	
+	[Counter 11]: Execution time :139995853 ns	Period: 150000000 ns
+	[WD] Watchdog timeout
+	
+	[Counter 12]: Execution time :149997078 ns	Period: 160000000 ns
+	[WD] Watchdog timeout
+	
+	[WD] Watchdog timeout
+	[WD] Counter timeout
+	[Counter 13]: Execution time :159995490 ns	Period: 170000000 ns
+	
+	[WD] Watchdog timeout
+	[WD] Counter timeout
+	[Counter 14]: Execution time :169998011 ns	Period: 180000000 ns
+	
+	[WD] Watchdog timeout
+	[WD] Counter timeout
+	[Counter 15]: Execution time :179995787 ns	Period: 190000000 ns
+	
+	[WD] Watchdog timeout
+	[WD] Counter timeout
+	[Counter 16]: Execution time :189996388 ns	Period: 200000000 ns
+	
+	[WD] Watchdog timeout
+	[WD] Counter timeout
