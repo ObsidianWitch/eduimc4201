@@ -50,8 +50,8 @@ static int my_init(void) {
 	rt_typed_sem_init(&semaphore2, 0, BIN_SEM);
 
     rt_set_oneshot_mode();
-    ierr1 = rt_task_init(&tasks[0], task_body1, 0, STACK_SIZE, 1, 0, 0);
-    ierr2 = rt_task_init(&tasks[1], task_body2, 0, STACK_SIZE, 0, 0, 0);
+    ierr1 = rt_task_init_cpuid(&tasks[0], task_body1, 0, STACK_SIZE, 1, 0, 0, 0);
+    ierr2 = rt_task_init_cpuid(&tasks[1], task_body2, 0, STACK_SIZE, 0, 0, 0, 0);
 
     printk("[task 1] init return code %d by program %s\n", ierr1, __FILE__);
     printk("[task 2] init return code %d by program %s\n", ierr2, __FILE__);

@@ -75,7 +75,7 @@ static int my_init(void) {
     rt_set_oneshot_mode();
 
     for (i = 0 ; i < N_TASK ; i++) {
-        int ierr = rt_task_init(&tasks[i], task_body, i, STACK_SIZE, Priority[i], 0, 0);
+        int ierr = rt_task_init_cpuid(&tasks[i], task_body, i, STACK_SIZE, Priority[i], 0, 0, 0);
 
         printk("[task %d] init return code %d by program %s\n", i, ierr, __FILE__);
 
