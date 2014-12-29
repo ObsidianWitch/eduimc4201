@@ -26,7 +26,7 @@ static int Priority[N_TASK] = {1, 2, 3};
 static RT_TASK tasks[N_TASK];
 static RTIME first_release;
 
-RTIME calibrate() {
+RTIME calibrate(void) {
 	int k;
     RTIME a, b, value;
 
@@ -42,14 +42,14 @@ RTIME calibrate() {
     return value;
 }
 
-void run_for_1_time_unit() {
+void run_for_1_time_unit(void) {
     int i;
     for(i = 0; i <  VALUE; i++) {
         nop();
     }
 }
 
-void task_body(int arg) {
+void task_body(long int arg) {
      int loop = N_LOOP;
 
     while (loop--) {

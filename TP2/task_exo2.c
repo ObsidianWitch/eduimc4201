@@ -24,9 +24,9 @@ static SEM semaphore;
 	}
 }*/
 
-void task_body(int arg) {
+void task_body(long int arg) {
     RTIME reference = rt_get_time();
-	int i, counter_period = 5 * TEN_MS;
+	int counter_period = 5 * TEN_MS;
 	int counter = 0;
 
 	while(1) {
@@ -43,7 +43,7 @@ void task_body(int arg) {
 	}
 }
 
-void wd_body(int arg) {
+void wd_body(long int arg) {
 	RTIME begin, end;
 
     // First wait

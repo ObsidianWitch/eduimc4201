@@ -14,7 +14,7 @@ MODULE_LICENSE("GPL");
 
 static RT_TASK my_task;
 
-void my_code(int arg) {
+void my_code(long int arg) {
     static int loop = N_LOOP ;
 
     while (loop--) {

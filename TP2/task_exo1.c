@@ -16,7 +16,7 @@ static RTIME first_release;
 static SEM semaphore1;
 static SEM semaphore2;
 
-void task_body1(int arg) {
+void task_body1(long int arg) {
      int loop = N_LOOP;
 
     while (loop--) {
@@ -30,7 +30,7 @@ void task_body1(int arg) {
     }
 }
 
-void task_body2(int arg) {
+void task_body2(long int arg) {
      int loop = N_LOOP;
 
     while (loop--) {

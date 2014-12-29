@@ -14,8 +14,8 @@ MODULE_LICENSE("GPL");
 
 static RT_TASK my_task;
 
-void my_code(int arg) {
-    RTIME t_first_release = rt_get_time_ns();;
+void my_code(long int arg) {
+    RTIME t_first_release = rt_get_time_ns();
     static int loop = N_LOOP ;
 
     while (loop--) {
