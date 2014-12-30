@@ -1,2 +1,70 @@
 \subsection{Ex3 - FIFO}
-% TODO
+
+The objective of this exercise was to reuse the previous one, but instead of writing the application output in the kernel ring buffer we had to write it in a FIFO (named pipe). The benefit of this modification is avoiding the pollution of the kernel message buffer.\\
+
+\noindent In order to do that, we used the RTAI FIFO module's following functions :
+\begin{itemize}
+    \item \textbf{rtf\_create()} : Creation of a real-time FIFO.
+    \item \textbf{rtf\_destroy()} : Close a real-time FIFO.
+    \item \textbf{rtf\_put()} : Write data to a FIFO.
+\end{itemize}
+\
+
+We also created a \textbf{rtf\_printf()} function in order to easily replace the \textbf{rt\_printk()} calls which were previously made. This function takes a format string as a first argument, and additional parameters which will replace the placeholders in this string. A \emph{va\_list} is filled with the function's additional arguments, which is then used as a parameter of \textbf{vsnprintf()} to obtain a formatted string. This string can then be written to the fifo with \textbf{rtf\_put()}.\\
+
+\begin{lstlisting}[caption={rtf\_printf}]
+void rtf_printf(const char* fmt, ...) {
+	va_list args;
+
+	va_start(args, fmt);
+	vsnprintf(buffer, BUFFER_SIZE, fmt, args);
+	va_end(args);
+
+	rtf_put(fifo, buffer, strlen(buffer));
+}
+\end{lstlisting}
+
+\subsubsection{Output}
+Our program opens and writes data into the \emph{/dev/rtf0} FIFO. In order to read it, we just have to use the \textbf{cat} command.\\
+
+\begin{lstlisting}
+> cat /dev/rtf0
+
+[Counter] init return code 0 by program /home/obside/Documents/real_time_tps/TP2/task_exo3.c
+[WD] init return code 0 by program /home/obside/Documents/real_time_tps/TP2/task_exo3.c
+[Counter 1]: Execution time :6924 ns	Period: 50000000 ns
+[Counter 2]: Execution time :50332745 ns	Period: 60000000 ns
+[Counter 3]: Execution time :59745000 ns	Period: 70000000 ns
+[Counter 4]: Execution time :70034127 ns	Period: 80000000 ns
+[Counter 5]: Execution time :80116079 ns	Period: 90000000 ns
+[Counter 6]: Execution time :89944172 ns	Period: 100000000 ns
+[Counter 7]: Execution time :100050455 ns	Period: 110000000 ns
+[WD] Watchdog timeout
+[Counter 8]: Execution time :110019078 ns	Period: 120000000 ns
+[WD] Watchdog timeout
+[Counter 9]: Execution time :120006451 ns	Period: 130000000 ns
+[WD] Watchdog timeout
+[Counter 10]: Execution time :129798212 ns	Period: 140000000 ns
+[WD] Watchdog timeout
+[Counter 11]: Execution time :140095525 ns	Period: 150000000 ns
+[WD] Watchdog timeout
+[Counter 12]: Execution time :149971340 ns	Period: 160000000 ns
+[WD] Watchdog timeout
+[WD] Watchdog timeout
+[WD] Counter timeout
+[Counter 13]: Execution time :160041252 ns	Period: 170000000 ns
+[WD] Watchdog timeout
+[WD] Counter timeout
+[Counter 14]: Execution time :170057848 ns	Period: 180000000 ns
+[WD] Watchdog timeout
+[WD] Counter timeout
+[Counter 15]: Execution time :179956790 ns	Period: 190000000 ns
+[WD] Watchdog timeout
+[WD] Counter timeout
+[Counter 16]: Execution time :189892657 ns	Period: 200000000 ns
+[WD] Watchdog timeout
+[WD] Counter timeout
+\end{lstlisting}
+
+\subsubsection{Source code}
+\lstinputlisting{../TP2/task_exo3.c}
