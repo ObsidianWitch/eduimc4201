@@ -1,5 +1,4 @@
 #include <linux/module.h>
-#include <linux/string.h>
 MODULE_LICENSE("GPL");
 #include <asm/io.h>
 #include <asm/rtai.h>
