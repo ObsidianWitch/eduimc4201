@@ -456,3 +456,45 @@ Execution Trace
 	
 	[WD] Watchdog timeout
 	[WD] Counter timeout
+
+exo3
+---
+
+Execution Trace
+
+	> cat /dev/rtf0
+	[Counter] init return code 0 by program /home/obside/Documents/real_time_tps/TP2/task_exo3.c
+	[WD] init return code 0 by program /home/obside/Documents/real_time_tps/TP2/task_exo3.c
+	[Counter 1]: Execution time :6924 ns	Period: 50000000 ns
+	[Counter 2]: Execution time :50332745 ns	Period: 60000000 ns
+	[Counter 3]: Execution time :59745000 ns	Period: 70000000 ns
+	[Counter 4]: Execution time :70034127 ns	Period: 80000000 ns
+	[Counter 5]: Execution time :80116079 ns	Period: 90000000 ns
+	[Counter 6]: Execution time :89944172 ns	Period: 100000000 ns
+	[Counter 7]: Execution time :100050455 ns	Period: 110000000 ns
+	[WD] Watchdog timeout
+	[Counter 8]: Execution time :110019078 ns	Period: 120000000 ns
+	[WD] Watchdog timeout
+	[Counter 9]: Execution time :120006451 ns	Period: 130000000 ns
+	[WD] Watchdog timeout
+	[Counter 10]: Execution time :129798212 ns	Period: 140000000 ns
+	[WD] Watchdog timeout
+	[Counter 11]: Execution time :140095525 ns	Period: 150000000 ns
+	[WD] Watchdog timeout
+	[Counter 12]: Execution time :149971340 ns	Period: 160000000 ns
+	[WD] Watchdog timeout
+	[WD] Watchdog timeout
+	[WD] Counter timeout
+	[Counter 13]: Execution time :160041252 ns	Period: 170000000 ns
+	[WD] Watchdog timeout
+	[WD] Counter timeout
+	[Counter 14]: Execution time :170057848 ns	Period: 180000000 ns
+	[WD] Watchdog timeout
+	[WD] Counter timeout
+	[Counter 15]: Execution time :179956790 ns	Period: 190000000 ns
+	[WD] Watchdog timeout
+	[WD] Counter timeout
+	[Counter 16]: Execution time :189892657 ns	Period: 200000000 ns
+	[WD] Watchdog timeout
+	[WD] Counter timeout
+

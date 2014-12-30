@@ -15,30 +15,36 @@ MODULE_LICENSE("GPL");
 #define VALUE		1000000
 #define HIGH_PRIO   0
 #define LOW_PRIO    1
+#define BUFFER_SIZE 4096
 
 static RT_TASK tasks[N_TASK];
 static RTIME first_release;
 static SEM semaphore;
 static int is_counting = 1;
 static int fifo = 0; // /dev/rtf0
+static char buffer[BUFFER_SIZE];
 
-void rtf_put_helper(char* str) {
-	rtf_put(fifo, str, strlen(str));
+void rtf_printf(const char* fmt, ...) {
+	va_list args;
+	
+	va_start(args, fmt);
+	vsnprintf(buffer, BUFFER_SIZE, fmt, args);
+	va_end(args);
+	
+	rtf_put(fifo, buffer, strlen(buffer));
 }
 
 void task_body(long int arg) {
     RTIME reference = rt_get_time();
 	int counter_period = PERIOD;
 	int counter = 0;
-	char buffer[256];
 
 	while(counter_period <= 20 * TEN_MS) {
 		counter++;
 		rt_sem_signal(&semaphore);
 		
-		snprintf(buffer, 256, "[Counter %d]: Execution time :%llu ns\tPeriod: %d ns\n", 
+		rtf_printf("[Counter %d]: Execution time :%llu ns\tPeriod: %d ns\n", 
 			counter, count2nano(rt_get_time()-reference), counter_period);
-		rtf_put_helper(buffer);
 
         reference = rt_get_time();
 
@@ -61,11 +67,11 @@ void wd_body(long int arg) {
     	diff = rt_get_time() - begin;
     	
 		if (count2nano(diff) >= 10*TEN_MS) {
-    		rtf_put_helper("[WD] Watchdog timeout\n");
+    		rtf_printf("[WD] Watchdog timeout\n");
     	}
 
     	if (sig != 0) {
-    		rtf_put_helper("[WD] Counter timeout\n");
+    		rtf_printf("[WD] Counter timeout\n");
     	}
     }
 }
@@ -77,14 +83,14 @@ static int my_init(void) {
 	rt_typed_sem_init(&semaphore, 0, BIN_SEM);
 	
 	// Init fifo
-	rtf_create(fifo, 256);
+	rtf_create(fifo, 4096);
 
     rt_set_oneshot_mode();
     ierr2 = rt_task_init_cpuid(&tasks[1], wd_body, HIGH_PRIO, STACK_SIZE, 1, 0, 0, 0);
     ierr1 = rt_task_init_cpuid(&tasks[0], task_body, LOW_PRIO, STACK_SIZE, 1, 0, 0, 0);
 	
-    printk("[Counter] init return code %d by program %s\n", ierr1, __FILE__);
-    printk("[WD] init return code %d by program %s\n", ierr2, __FILE__);
+    rtf_printf("[Counter] init return code %d by program %s\n", ierr1, __FILE__);
+    rtf_printf("[WD] init return code %d by program %s\n", ierr2, __FILE__);
 
     if (ierr1 == -1 || ierr2 == -1) {
         return -1;
