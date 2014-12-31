@@ -13,18 +13,23 @@ MODULE_LICENSE("GPL");
 #define N_LOOP      10
 
 static RT_TASK my_task;
+static RTIME first_release;
 
 void my_code(long int arg) {
     static int loop = N_LOOP ;
 
     while (loop--) {
+		RTIME begin, end;
         int i;
-
-        rt_printk("Start task\t  %llu ns\n", rt_get_time_ns());
+		
+		begin = rt_get_time();
+        rt_printk("Start task\t %llu ns\n", count2nano(begin - first_release));
         for(i = 0; i < PERIOD; i++) {
             nop();
         }
-        rt_printk("End task\t  %llu ns\n", rt_get_time_ns());
+        end = rt_get_time();
+        rt_printk("End task\t\t %llu ns\n", count2nano(end - first_release));
+        rt_printk("Execution time\t %llu ns\n\n", count2nano(end - begin));
 
         rt_task_wait_period();
     }
@@ -39,8 +44,9 @@ static int my_init(void) {
     printk("[task %d] init return code %d by program %s\n", ID, ierr, __FILE__);
 
     if (!ierr) {
+		first_release = rt_get_time();
         start_rt_timer(nano2count(TICK_PERIOD));
-        rt_task_make_periodic(&my_task, rt_get_time(), nano2count(PERIOD));
+        rt_task_make_periodic(&my_task, first_release, nano2count(PERIOD));
     }
 
     return ierr;

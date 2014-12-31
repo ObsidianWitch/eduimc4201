@@ -22,26 +22,46 @@ Ex2
 
 Execution trace
 
-    Start task	  6541113525308
-    End task	  6541738584072
-    Start task	  6542113524775
-    End task	  6542738578872
-    Start task	  6543113524782
-    End task	  6543738578982
-    Start task	  6544113524705
-    End task	  6544738579071
-    Start task	  6545113524778
-    End task	  6545738579456
-    Start task	  6546113524813
-    End task	  6546738579889
-    Start task	  6547113524793
-    End task	  6547738579471
-    Start task	  6548113524782
-    End task	  6548738579032
-    Start task	  6549113524772
-    End task	  6549738578804
-    Start task	  6550113524711
-    End task	  6550738578794
+	[task 1] init return code 0 by program /home/obside/Documents/real_time_tps/TP1/task_exo2.c
+	Start task		4273395 ns
+	End task		406803696 ns
+	Execution time	402530302 ns
+
+	Start task		1000121951 ns
+	End task		1437751081 ns
+	Execution time	437629129 ns
+
+	Start task		2000145192 ns
+	End task		2445468240 ns
+	Execution time	445323049 ns
+
+	Start task		3000060099 ns
+	End task		3427724019 ns
+	Execution time	427663921 ns
+
+	Start task		4001848864 ns
+	End task		4429964555 ns
+	Execution time	428115691 ns
+
+	Start task		5000058153 ns
+	End task		5447639623 ns
+	Execution time	447581470 ns
+
+	Start task		6000163491 ns
+	End task		6434371414 ns
+	Execution time	434207923 ns
+
+	Start task		7000116167 ns
+	End task		7434612401 ns
+	Execution time	434496233 ns
+
+	Start task		8000106867 ns
+	End task		8398967443 ns
+	Execution time	398860576 ns
+
+	Start task		9000045953 ns
+	End task		9428073434 ns
+	Execution time	428027482 ns
 
 Ex3
 ---
