@@ -3,9 +3,9 @@ This first exercise's purpose is to create our first task with rtai. The task is
 
 In order for the task to run periodically, we used the \textbf{rt\_task\_make\_periodic()} function which needs the period in count units as a parameter. \\
 
-The compiled program prints the result by using \textbf{rt\_printk()}, these prints are stored in the message buffer of the kernel. To take a look at the output, we can used the command line \textbf{dmesg} to display the the previously mentionned message buffer. \\
+The compiled program prints the result by using \textbf{rt\_printk()}, these messages are stored in the kernel ring buffer. To take a look at the output, we can use the \textbf{dmesg} command to display the previously mentioned message buffer. \\
 
-In order to secure the end of the program, we have to make sure that the timer is stopped and all the tasks are deleted.
+In order to secure the end of the program, we have to make sure that the timer is stopped (\textbf{stop\_rt\_timer()}) and all the tasks are deleted (\textbf{rt\_task\_delete()}).
 
 \subsubsection{Output}
 \begin{lstlisting}[keywordstyle=\color{black}]

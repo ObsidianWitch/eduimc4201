@@ -2,15 +2,15 @@
 
 \subsubsection{Schedulability}
 
-To study the schedulability of a task set, the processor load is used in order to determine with which algorithm it is possible the task set is schedulable. \\
+To study the schedulability of a task set, the processor load is computed. This value allows us to determine with which algorithm the task set is schedulable. \\
 
-For the first task set, the processor load is the following : \\
+\noindent For the first task set, the processor load is the following : \\
 
 $U_1 = \sum_{i=1}^{n} \frac{C_i}{T_i} = 0.958$ \\
 
 The value of $U_1$ is greater than $n(2^{\frac{1}{n}}-1)$ (with $n$ the number of tasks) which is equal to 0.779. It is then not schedulable with RM, but $U_1$ is still lesser than 1, making the task set schedulable with EDF. \\
 
-When it comes to the seconde task set, the processor load's value is $U_2 = 0.852$. Like the first task set, it is schedulable with EDF, but not with RM. \\
+When it comes to the second task set, the processor load's value is $U_2 = 0.852$. Like the first task set, it is schedulable with EDF, but not with RM. \\
 
 \begin{center}
 	\begin{tabular}{|c|c|c|c|}
@@ -75,7 +75,7 @@ When it comes to the seconde task set, the processor load's value is $U_2 = 0.85
 
 \end{RTGrid}
 
-The deadline of the task 3 was missed on the above chronogram (pointed out by the red execution). \\
+The 3\textsuperscript{rd} task's deadline was missed on the above chronogram (pointed out by the red execution). \\
 
 \begin{RTGrid}[width=10cm]{3}{22}
 % \TaskArrDead{task number}{release}{relative deadline}
@@ -107,7 +107,7 @@ The deadline of the task 3 was missed on the above chronogram (pointed out by th
 
 \end{RTGrid}
 
-On a short time, we can't see the case of a missed deadline. However, it was proved theorically that this task set is not schedulable with Rate-Monotonic scheduling.
+There are no missed deadlines visible above in such a short time interval. However, it was proved theoretically that this task set is not schedulable with Rate-Monotonic scheduling.
 
 \subsubsection{Earliest deadline first scheduling}
 % TODO
