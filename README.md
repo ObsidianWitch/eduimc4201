@@ -11,4 +11,7 @@ Use of *rtsched* to write the report. *rtsched* package based on *texlive-pstric
 
 #### Report ####
 
-* tp1 ex3 [Mute] - On going
+* tp1 ex3
+
+##### Notification #####
+[31/12/2014 - 15:29] Mute is cooking for New Year's Eve
