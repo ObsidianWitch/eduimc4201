@@ -1,2 +1,24 @@
 \subsection{Ex1 - Hello World}
-% TODO
+This first exercise's purpose is to create our first task with rtai. The task is initialized with the \textbf{rt\_task\_init\_cpuid()} for which we must specify, among others, the function which we want to execute for this task, the argument which will be passed to the function, the task's priority, and the cpu on which it will be executed.\\
+
+In order for the task to run periodically, we used the \textbf{rt\_task\_make\_periodic()} function which needs the period in count units as a parameter.
+
+\subsubsection{Output}
+\begin{lstlisting}[keywordstyle=\color{black}]
+> dmesg
+...
+[task 1] init return code 0 by program /home/obside/Documents/real_time_tps/TP1/task_exo1.c
+Hello world  28
+Hello world  999999523
+Hello world  1999999601
+Hello world  2999999531
+Hello world  3999999531
+Hello world  4999999526
+Hello world  5999999528
+Hello world  6999999523
+Hello world  7999999678
+Hello world  8999999531
+\end{lstlisting}
+
+\subsubsection{Source code}
+\lstinputlisting{../TP1/task_exo1.c}
