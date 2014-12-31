@@ -1,5 +1,47 @@
 \subsection{Ex3 - Scheduling}
 
+\subsubsection{Schedulability}
+
+To study the schedulability of a task set, the processor load is used in order to determine with which algorithm it is possible the task set is schedulable. \\
+
+For the first task set, the processor load is the following : \\
+
+$U_1 = \sum_{i=1}^{n} \frac{C_i}{T_i} = 0.958$ \\
+
+The value of $U_1$ is greater than $n(2^{\frac{1}{n}}-1)$ (with $n$ the number of tasks) which is equal to 0.779. It is then not schedulable with RM, but $U_1$ is still lesser than 1, making the task set schedulable with EDF. \\
+
+When it comes to the seconde task set, the processor load's value is $U_2 = 0.852$. Like the first task set, it is schedulable with EDF, but not with RM. \\
+
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\multicolumn{4}{|c|}{\textbf{Set 1}} \\
+		\hline
+		\, & C & Period & Deadline \\
+		\hline
+		T1 & 1 & 4 & 4 \\
+		\hline
+		T2 & 2 & 6 & 6 \\
+		\hline
+		T3 & 3 & 8 & 8 \\
+		\hline
+	\end{tabular}
+	\quad
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\multicolumn{4}{|c|}{\textbf{Set 2}} \\
+		\hline
+		\, & C & Period & Deadline \\
+		\hline
+		T1 & 2 & 7 & 7 \\
+		\hline
+		T2 & 2 & 11 & 11 \\
+		\hline
+		T3 & 5 & 13 & 13 \\
+		\hline
+	\end{tabular}
+\end{center}
+
 \subsubsection{Rate-monotonic scheduling}
 % TODO
 
