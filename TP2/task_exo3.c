@@ -59,17 +59,16 @@ void wd_body(long int arg) {
 	
     while (is_counting) {
     	RTIME begin, diff;
-    	int sig;
 		
 		begin = rt_get_time();
-    	sig = rt_sem_wait_timed(&semaphore, nano2count(15*TEN_MS));
+    	rt_sem_wait_timed(&semaphore, nano2count(15*TEN_MS));
     	diff = rt_get_time() - begin;
     	
 		if (count2nano(diff) >= 10*TEN_MS) {
     		rtf_printf("[WD] Watchdog timeout\n");
     	}
 
-    	if (sig != 0) {
+        if (count2nano(diff) >= 15*TEN_MS) {
     		rtf_printf("[WD] Counter timeout\n");
     	}
     }
