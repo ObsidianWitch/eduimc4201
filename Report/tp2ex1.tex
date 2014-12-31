@@ -23,7 +23,7 @@ Print 'T2 ends'
 
 This can be done with (binary) semaphores which are created in rtai with \textbf{rt\_typed\_sem\_init()} and destroyed with \textbf{rt\_sem\_delete()}. To use a resource (lock a binary semaphore) \textbf{rt\_sem\_wait()} is used, and to give a resource (unlock a binary semaphore) \textbf{rt\_sem\_signal()} is used.\\
 
-To obtain the wanted output, we initialize two semaphores to 0 and use them in the following manner :
+To obtain the wanted output, we initialise two semaphores to 0 and use them in the following manner :
 \begin{multicols}{2}
 \begin{lstlisting}[numbers=none,caption = {Task 1}]
 Print 'T1'
