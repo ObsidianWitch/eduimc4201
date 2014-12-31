@@ -1,7 +1,11 @@
 \subsection{Ex1 - Hello World}
 This first exercise's purpose is to create our first task with rtai. The task is initialised with the \textbf{rt\_task\_init\_cpuid()} for which we must specify, among others, the function which we want to execute for this task, the argument which will be passed to the function, the task's priority, and the cpu on which it will be executed.\\
 
-In order for the task to run periodically, we used the \textbf{rt\_task\_make\_periodic()} function which needs the period in count units as a parameter.
+In order for the task to run periodically, we used the \textbf{rt\_task\_make\_periodic()} function which needs the period in count units as a parameter. \\
+
+The compiled program prints the result by using \textbf{rt\_printk()}, these prints are stored in the message buffer of the kernel. To take a look at the output, we can used the command line \textbf{dmesg} to display the the previously mentionned message buffer. \\
+
+In order to secure the end of the program, we have to make sure that the timer is stopped and all the tasks are deleted.
 
 \subsubsection{Output}
 \begin{lstlisting}[keywordstyle=\color{black}]
