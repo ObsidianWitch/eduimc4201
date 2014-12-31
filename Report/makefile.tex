@@ -1,0 +1,26 @@
+\section{Makefile \& run script}
+
+We modified the \emph{Makefile} and \emph{run} script which were given to us in order to use them more easily on different configurations of rtai. To do that, we used the \emph{rtai-config} binary which gives information such as the version (\emph{-{}-version}), the path to rtai (\emph{-{}-prefix}), needed cflags for compilation (\emph{-{}-module-cflags}), and so on. With these modifications, the only thing which must be done before compiling the programs is adding the path to rtai binaries to the PATH environment variable. On a sidenote, the \emph{KBUILD\_EXTRA\_SYMBOLS} line in the makefile should fix all the warnings related to undefined rtai functions.
+
+\begin{lstlisting}[language=sh,caption={rtai-config help}]
+Usage rtai-config OPTIONS
+Options :
+        --help
+        --version
+        --cc
+        --cxx
+        --arch
+        --subarch
+        --prefix
+        --config
+        --module-cflags
+        --module-cxxflags
+        --module-ext
+        --lxrt-cflags
+        --lxrt-ldflags
+        --linux-dir
+...
+\end{lstlisting}
+
+\lstinputlisting[caption={Makefile}]{../TP1/Makefile}
+\lstinputlisting[caption={run}]{../TP2/run}
