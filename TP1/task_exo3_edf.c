@@ -92,7 +92,7 @@ static int my_init(void) {
 
     time_unit = calibrate();
 
-	first_release = rt_get_time() + nano2count(2 * ONE_SEC);
+	first_release = rt_get_time();
     for (i = 0 ; i < N_TASK ; i++) {
         rt_task_make_periodic(&tasks[i], first_release, Period[i] * time_unit);
     }
