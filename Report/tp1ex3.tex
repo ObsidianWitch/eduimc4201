@@ -212,4 +212,161 @@ Task length 2	112509936 ns
 \lstinputlisting{../TP1/task_exo3_rm.c}
 
 \subsubsection{Earliest deadline first scheduling}
-% TODO
+Both of the task sets are schedulable with EDF, and are correctly simulated as shown by the outputs below.\\
+
+% \begin{RTGrid}[...]{number of tasks}{time length}
+\begin{RTGrid}[width=10cm]{3}{20}
+% \TaskArrDead{task number}{release}{relative deadline}
+% \TaskExecution{task number}{run time}{suspend time}
+
+% Task 1
+\TaskArrDead{1}{0}{4}
+\TaskArrDead{1}{4}{4}
+\TaskArrDead{1}{8}{4}
+
+\TaskExecution{1}{0}{1}
+\TaskExecution{1}{6}{7}
+\TaskExecution{1}{9}{10}
+\TaskExecution{1}{13}{14}
+
+% Task 2
+\TaskArrDead{2}{0}{6}
+\TaskArrDead{2}{6}{6}
+
+\TaskExecution{2}{1}{3}
+\TaskExecution{2}{7}{9}
+\TaskExecution{2}{14}{16}
+
+% Task 3
+\TaskArrDead{3}{0}{8}
+
+\TaskExecution{3}{3}{6}
+\TaskExecution{3}{10}{13}
+
+\end{RTGrid}
+
+\begin{RTGrid}[width=10cm]{3}{22}
+% \TaskArrDead{task number}{release}{relative deadline}
+% \TaskExecution{task number}{run time}{suspend time}
+
+% Task 1
+\TaskArrDead{1}{0}{7}
+\TaskArrDead{1}{7}{7}
+\TaskArrDead{1}{14}{7}
+
+\TaskExecution{1}{0}{2}
+\TaskExecution{1}{9}{10}
+\TaskExecution{1}{14}{16}
+
+% Task 2
+\TaskArrDead{2}{0}{11}
+\TaskArrDead{2}{11}{11}
+
+\TaskExecution{2}{2}{4}
+\TaskExecution{2}{11}{13}
+
+% Task 3
+\TaskArrDead{3}{0}{13}
+
+\TaskExecution{3}{4}{9}
+\TaskExecution{3}{13}{14}
+\TaskExecution{3}{16}{20}
+
+\end{RTGrid}
+\
+
+\begin{framewarning}
+If a task set possesses deadlines  which are the same for some \textbf{jobs}, there is not only one possible EDF schedule (as is the case with the first task set). If at a specific time 2 (or more) jobs have the same deadline, either of them can be selected.
+\end{framewarning}
+\
+
+As for the differences in the code between RM and EDF, we used \textbf{rt\_task\_set\_resume\_end\_times()} instead of \textbf{rt\_task\_wait\_period()}. This function's parameters are the next resume time and the next deadline (relative if the values are negative, absolute otherwise).
+
+\paragraph{Output}
+\
+
+\begin{lstlisting}[keywordstyle=\color{black}, caption={Output (reformatted) EDF 1\textsuperscript{st} set}]
+[task 0] init return code 0 by program /home/obside/Documents/real_time_tps/TP1/task_exo3_edf.c
+[task 1] init return code 0 by program /home/obside/Documents/real_time_tps/TP1/task_exo3_edf.c
+[task 2] init return code 0 by program /home/obside/Documents/real_time_tps/TP1/task_exo3_edf.c
+value: 35972419
+
+Start task 0	152218 ns
+End task 0		9467506 ns
+Task length 0	9315288 ns
+
+Start task 1	9502157 ns
+End task 1		26562099 ns
+Task length 1	17059943 ns
+
+Start task 2	26578097 ns
+End task 2		50462105 ns
+Task length 2	23884008 ns
+
+Start task 0	55727408 ns
+End task 0		63412955 ns
+Task length 0	7685547 ns
+
+Start task 1	83513360 ns
+End task 1		98996596 ns
+Task length 1	15483237 ns
+
+Start task 0	111348324 ns
+End task 0		119334851 ns
+Task length 0	7986527 ns
+
+Start task 2	119350307 ns
+End task 2		142581090 ns
+Task length 2	23230784 ns
+
+Start task 0	167020391 ns
+End task 0		175435833 ns
+Task length 0	8415443 ns
+
+Start task 1	175450210 ns
+End task 1		192542907 ns
+Task length 1	17092698 ns
+
+Start task 0	222638382 ns
+End task 0		236306253 ns
+Task length 0	13667872 ns
+\end{lstlisting}
+
+\begin{lstlisting}[keywordstyle=\color{black}, caption={Output (reformatted) EDF 2\textsuperscript{nd} set}]
+[task 0] init return code 0 by program /home/obside/Documents/real_time_tps/TP1/task_exo3_edf.c
+[task 1] init return code 0 by program /home/obside/Documents/real_time_tps/TP1/task_exo3_edf.c
+[task 2] init return code 0 by program /home/obside/Documents/real_time_tps/TP1/task_exo3_edf.c
+value: 24986892
+
+Start task 0	  24387 ns
+End task 0	  17163264 ns
+Task length 0	  17138876 ns
+
+Start task 1	  17218292 ns
+End task 1	  33560218 ns
+Task length 1	  16341927 ns
+
+Start task 2	  33604061 ns
+End task 2	  78473155 ns
+Task length 2	  44869094 ns
+
+Start task 0	  78487536 ns
+End task 0	  94033300 ns
+Task length 0	  15545765 ns
+
+Start task 1	  106399457 ns
+End task 1	  121940246 ns
+Task length 1	  15540790 ns
+
+Start task 2	  125650798 ns
+	Start task 0	  135303126 ns
+	End task 0	  156063969 ns
+	Task length 0	  20760843 ns
+End task 2	  196911449 ns
+Task length 2	  71260651 ns
+\end{lstlisting}
+
+\paragraph{Source code}
+\
+
+\lstinputlisting{../TP1/task_exo3_edf.c}
