@@ -43,7 +43,6 @@ When it comes to the second task set, the processor load's value is $U_2 = 0.852
 \end{center}
 
 \subsubsection{Rate-monotonic scheduling}
-% TODO
 
 % \begin{RTGrid}[...]{number of tasks}{time length}
 \begin{RTGrid}[width=10cm]{3}{20}
@@ -107,7 +106,11 @@ The 3\textsuperscript{rd} task's deadline was missed on the above chronogram (po
 
 \end{RTGrid}
 
-There are no missed deadlines visible above in such a short time interval. However, it was proved theoretically that this task set is not schedulable with Rate-Monotonic scheduling.
+There are no missed deadlines visible above in such a short time interval. However, it was proved theoretically that this task set is not schedulable with Rate-Monotonic scheduling.\\
+
+We wrote a \textbf{calibrate()} function which returns the value of one unit of time (in count units). We selected an arbitrary VALUE constant (20000000), which is used as a \emph{for} loop's number of iteration in which \textbf{nop()} instructions are executed. The value returned by this function is then used to compute each task period (\emph{Period[i] * time\_unit}).\\
+
+Each time we want to generate one unit of time to simulate a task's worst case execution time (C), we can use the \textbf{run\_for\_1\_time\_unit()} function which just contains a \emph{for} loop such as the one described above (VALUE iterations, nop() instructions).
 
 \paragraph{Output}
 \
