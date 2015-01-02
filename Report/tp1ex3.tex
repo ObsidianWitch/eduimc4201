@@ -2,16 +2,6 @@
 
 \subsubsection{Schedulability}
 
-To study the schedulability of a task set, the processor load is computed. This value allows us to determine with which algorithm the task set is schedulable. \\
-
-\noindent For the first task set, the processor load is the following : \\
-
-$U_1 = \sum_{i=1}^{n} \frac{C_i}{T_i} = 0.958$ \\
-
-The value of $U_1$ is greater than $n(2^{\frac{1}{n}}-1)$ (with $n$ the number of tasks) which is equal to 0.779. It is then not schedulable with RM, but $U_1$ is still lesser than 1, making the task set schedulable with EDF. \\
-
-When it comes to the second task set, the processor load's value is $U_2 = 0.852$. Like the first task set, it is schedulable with EDF, but not with RM. \\
-
 \begin{center}
 	\begin{tabular}{|c|c|c|c|}
 		\hline
@@ -41,6 +31,74 @@ When it comes to the second task set, the processor load's value is $U_2 = 0.852
 		\hline
 	\end{tabular}
 \end{center}
+
+To study the schedulability of a task set, the processor load is computed. This value allows us to determine with which algorithm the task set is schedulable. \\
+
+\noindent For the first task set, the processor load is the following : \\
+
+$U_1 = \sum_{i=1}^{n} \frac{C_i}{T_i} = 0.958$ \\
+
+The value of $U_1$ is greater than $n(2^{\frac{1}{n}}-1)$ (with $n$ the number of tasks) which is equal to 0.779, but lesser than 1. The task set set is schedulable with EDF, but we cannot say anything yet about the schedulability of this task set with fixed priority algorithms, since $U \leq n(2^{\frac{1}{n}}-1)$ is a sufficient but not necessary condition. We need to do a time-demand analysis in order to know more about the schedulability of this task set.\\
+
+$\forall i, D_i \leq T_i$, the system is schedulable with a fixed priority algorithm iff $w_i(t) = t$ with $t \in [0;D_i]$ and $w_i(t) = \sum_{k \leq i} \left[ \frac{t}{T_k} \right] C_k$. \\
+
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline
+		t & 1 \\
+		\hline
+		$w_1(t)$ & 1 \\
+		\hline
+	\end{tabular}
+	\quad
+	\begin{tabular}{|c|c|c|}
+		\hline
+		t & 1 & 3\\
+		\hline
+		$w_2(t)$ & 3 & 3 \\
+		\hline
+	\end{tabular}
+	\quad
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		t & 1 & 6 & 7\\
+		\hline
+		$w_3(t)$ & 6 & 7 & 9 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\noindent $w_3(7) = 9 > D_3 \rightarrow$ the first task set is not schedulable with RM.\\
+
+When it comes to the second task set, the processor load's value is $U_2 = 0.852$. Like the first task set, it is schedulable with EDF, but we cannot say anything about RM without a time-demand analysis. \\
+
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		t & 1 & 2 \\
+		\hline
+		$w_1(t)$ & 2 & 2 \\
+		\hline
+	\end{tabular}
+	\quad
+	\begin{tabular}{|c|c|c|}
+		\hline
+		t & 1 & 4\\
+		\hline
+		$w_2(t)$ & 4 & 4 \\
+		\hline
+	\end{tabular}
+	\quad
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		t & 1 & 9 & 11\\
+		\hline
+		$w_3(t)$ & 9 & 11 & 11 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\noindent $\forall i \enspace w_i(t) = t$ with $t \in [0;D_i] \rightarrow$ the second task set is schedulable with RM.
 
 \subsubsection{Rate-monotonic scheduling}
 
@@ -106,7 +164,7 @@ The 3\textsuperscript{rd} task's deadline was missed on the above chronogram (po
 
 \end{RTGrid}
 
-There are no missed deadlines visible above in such a short time interval. However, it was proved theoretically that this task set is not schedulable with Rate-Monotonic scheduling.\\
+There are no missed deadlines visible above, and it was proved theoretically that this task set is schedulable with Rate-Monotonic scheduling.\\
 
 We wrote a \textbf{calibrate()} function which returns the value of one unit of time (in count units). We selected an arbitrary VALUE constant (20000000), which is used as a \emph{for} loop's number of iteration in which \textbf{nop()} instructions are executed. The value returned by this function is then used to compute each task period (\emph{Period[i] * time\_unit}).\\
 
